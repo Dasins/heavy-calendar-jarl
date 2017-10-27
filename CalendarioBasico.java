@@ -50,6 +50,13 @@ public class CalendarioBasico
     }
     
     /**
-     * 
+     * Allows you to assign a specific date.
+     * Note: There are no control methods to validate data entry.
      */
+    public void fijarFecha (int setDay, int setMonth, int setYear) 
+    {
+        day = setDay;
+        month = setMonth;
+        year = setYear;
+    }
 }
