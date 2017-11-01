@@ -1,9 +1,8 @@
 
 /**
- * This basic calendar allows you to set the day, the month and year, 
- * return its value and can advance one day with a method.
- * 
- * Note: Some things stay in Spanish by exercise requirement.
+ * This basic calendar return the date, 
+ * allow to change the date by 
+ * user input or advance it one day.
  * 
  * @author (Daniel Carmenes Alvarez) 
  * @version (2017/10/27)
@@ -18,54 +17,50 @@ public class CalendarioBasico
     private int year;
     
     /**
-     * Constructor for objects of class CalendarioBasico
+     * Constructor for objects of class BasicCalendar.
      */
     public CalendarioBasico()
     {
-        day = 1;
-        month = 1;
+        day = 01;
+        month = 01;
         // There is no world before 2000.
-        year = 2001;
+        year = 01;
     }
 
     /**
      * Returns date in format (dd-mm-yy) with 8 characters. 
      */
-    public String obtenerFecha ()
+    public String getDate ()
     {
-        String noNumDay = String.valueOf(day);
-        String noNumMonth = String.valueOf(month);
-        String noNumYear = String.valueOf(year);
-        // If the day has only one character, put a zero before day.
-        if (noNumDay.length() < 2)
-        {
-            noNumDay = "0" + String.valueOf(day);
-        }
-        // If the month has only one character, put a zero before day.
-        if (noNumMonth.length() < 2)
-        {
-            noNumMonth = "0" + String.valueOf(month);
-        }
-        return noNumDay + "-" + noNumMonth + "-" + noNumYear.substring(2,4);
+        String date = (day+100) + "-" + (month+100) + "-" + (year+100); 
+        date = date.substring(1,4) 
+               + date.substring(5,8) 
+               + date.substring(9,11);
+        return date;
     }
     
     /**
-     * Allows you to assign a specific date.
+     * Set a specific date.
      * Note: There are no control methods to validate data entry.
      */
-    public void fijarFecha (int setDay, int setMonth, int setYear) 
+    public void setDate (int setDay, int setMonth, int setYear) 
     {
         day = setDay;
         month = setMonth;
-        year = setYear;
+        // How we only want to store two numbers
+        // and the value is between 2000 - 2099
+        // we subtract 2000 to the input.
+        year = setYear - 2000;
     }
     
     /**
-     * Advance one day the date.
-     * Did anyone mention the T.A.R.D.I.S?
+     * Add one day to the date.
+     * 
+     * Who needs a T.A.R.D.I.S.?
      */
-    public void avanzarDia ()
+    public void addOneDay ()
     {
+        // Check if adding a day changes the month or year.
         if (day == 30)
         {
             day = 01;
