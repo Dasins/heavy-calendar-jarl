@@ -2,39 +2,39 @@
 /**
  * This basic calendar return the date (dd-mm-yy), 
  * allow to change the date by 
- * user input or advance it one day.
+ * user input or advance it one dia.
  * 
  * @author (Daniel Carmenes Alvarez) 
  * @version (2017/10/27)
  */
 public class CalendarioBasico
 {
-    // Save the day.
-    private int day;
-    // Save the month.
-    private int month;
-    // Save the year.
-    private int year;
+    // Save the dia.
+    private int dia;
+    // Save the mes.
+    private int mes;
+    // Save the ano.
+    private int ano;
     
     /**
-     * Constructor for objects of class BasicCalendar.
+     * Constructor for objects of class CalendarioBasico.
      */
     public CalendarioBasico()
     {
-        day = 1;
-        month = 1;
+        dia = 1;
+        mes = 1;
         // There is no world before 2000.
-        // The eschaton comes in 2100.
-        year = 1;
+        // The Eschaton comes in 2100.
+        ano = 1;
     }
 
     /**
      * Returns date in format (dd-mm-yy) with 8 characters. 
      */
-    public String getDate ()
+    public String obtenerFecha ()
     {
         // Create a text chain like: '1dd-1mm-1yy'.
-        String date = (day+100) + "-" + (month+100) + "-" + (year+100);
+        String date = (dia+100) + "-" + (mes+100) + "-" + (ano+100);
         // Now, ignore '1' and take the rest.
         date = date.substring(1,4) 
                + date.substring(5,8) 
@@ -46,48 +46,50 @@ public class CalendarioBasico
      * Set a specific date.
      * Note: There are no control methods to validate data entry.
      */
-    public void setDate (int setDay, int setMonth, int setYear) 
+    public void fijarFecha (int setDia, int setMes, int setAno) 
     {
-        day = setDay;
-        month = setMonth;
+        dia = setDia;
+        mes = setMes;
         // How we only want to store two numbers
         // and the value is between 2000 - 2099
         // we subtract 2000 to the input.   
-        year = setYear - 2000;
-    }
-    
+        ano = setAno;
+        
+    }    
     /**
-     * Add one day to the date.
+     * Add one dia to the date.
      * 
      * Who needs a T.A.R.D.I.S.?
      */
-    public void addOneDay ()
+    public void avanzarFecha ()
     {
-        // Check if adding a day changes the month or year.
-        if (day != 30)
+        // Check if adding a dia changes the mes or ano.
+        if (dia == 30)
         {
-            day += 1;
-        }
-        // 'Cristian hates me' validation. 
-        // Stop the eschaton, 2100 never comes!
-        else if (day==30 && month==12 && year==99)
-        {
-            day = 1;
-            month = 1;
-            year = 1;
-        }
-        else 
-        {
-            day = 01;
-            if (month == 12) 
+            dia = 01;
+            if (mes == 12) 
             {
-                month = 01;
-                year += 1;                
+                mes = 01;
+                ano += 1;                
             }
             else 
             {
-                month += 1;
+                mes += 1;
             }
+        }
+        // 'Cristian hates me' validation. 
+        // Stop the Eschaton, 2100 never comes!
+        // If it is going to reach 2100, 
+        // set calendar to default.
+        else if (dia == 30 && mes == 12 && ano == 99)
+        {
+            dia = 1;
+            mes = 1;
+            ano = 0;
+        }
+        else 
+        {
+            dia += 1;
         }
     }    
 }
