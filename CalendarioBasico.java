@@ -1,6 +1,6 @@
 
 /**
- * This basic calendar return the date, 
+ * This basic calendar return the date (dd-mm-yy), 
  * allow to change the date by 
  * user input or advance it one day.
  * 
@@ -21,10 +21,11 @@ public class CalendarioBasico
      */
     public CalendarioBasico()
     {
-        day = 01;
-        month = 01;
+        day = 1;
+        month = 1;
         // There is no world before 2000.
-        year = 01;
+        // The eschaton comes in 2100.
+        year = 1;
     }
 
     /**
@@ -32,7 +33,9 @@ public class CalendarioBasico
      */
     public String getDate ()
     {
-        String date = (day+100) + "-" + (month+100) + "-" + (year+100); 
+        // Create a text chain like: '1dd-1mm-1yy'.
+        String date = (day+100) + "-" + (month+100) + "-" + (year+100);
+        // Now, ignore '1' and take the rest.
         date = date.substring(1,4) 
                + date.substring(5,8) 
                + date.substring(9,11);
@@ -49,7 +52,7 @@ public class CalendarioBasico
         month = setMonth;
         // How we only want to store two numbers
         // and the value is between 2000 - 2099
-        // we subtract 2000 to the input.
+        // we subtract 2000 to the input.   
         year = setYear - 2000;
     }
     
@@ -61,7 +64,19 @@ public class CalendarioBasico
     public void addOneDay ()
     {
         // Check if adding a day changes the month or year.
-        if (day == 30)
+        if (day != 30)
+        {
+            day += 1;
+        }
+        // 'Cristian hates me' validation. 
+        // Stop the eschaton, 2100 never comes!
+        else if (day==30 && month==12 && year==99)
+        {
+            day = 1;
+            month = 1;
+            year = 1;
+        }
+        else 
         {
             day = 01;
             if (month == 12) 
@@ -73,10 +88,6 @@ public class CalendarioBasico
             {
                 month += 1;
             }
-        }
-        else 
-        {
-            day += 1;
         }
     }    
 }
